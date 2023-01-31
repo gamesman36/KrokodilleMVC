@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krokodillespill</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // model
+        let tall1 = 8;
+        let tall2 = 2;
+        let poeng = 0;
+
+        const app = document.getElementById("app");
+
+        // view
+        updateView();
+        function updateView() {
+            html = /* html */`
+            <h1>Krokodillespill</h1>
+            <p><img src="croc.jpg" style="max-width: 25%"></p>
+            <div id="tall1">${tall1}</div>
+            <input type="text" id="oper">
+            <div id="tall2">${tall2}</div><br />
+            <button id="submit" onclick="submit()">Submit</button>
+            <button id="reset" onclick="reset()">Reset</button><br /><br />
+            <div id="poeng">Poeng: ${poeng}</div>`;
+
+            app.innerHTML = html;
+        }
+
+        // controller
+        function getOperator(tall1, tall2) {
+            if (tall1 > tall2) return ">";
+            else if (tall1 == tall2) return "=";
+            else return "<";
+        }
+
+        function submit() {
+            if (document.getElementById("oper").value == getOperator(tall1, tall2)) {
+                poeng++;
+
+            } else {
+                poeng--;
+            }
+
+            reset();
+        }
+
+        function reset() {
+            tall1 = Math.floor(Math.random() * 10) + 1;
+            tall2 = Math.floor(Math.random() * 10) + 1;
+            updateView();
+        }
+    </script>
+</body>
+
+</html>
